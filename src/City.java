@@ -46,8 +46,7 @@ public class City implements Comparable<City> {
       return false;
     }
     City city = (City) o;
-    return Objects.equals(cityName, city.cityName) &&
-        Objects.equals(geoLocationPoint, city.geoLocationPoint);
+    return Objects.equals(geoLocationPoint, city.geoLocationPoint);
   }
 
   @Override

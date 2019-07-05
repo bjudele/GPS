@@ -14,10 +14,11 @@ public class GPS {
   private Map<String, List<City>> pathToEachCity;
 
   public GPS(GeoMap geoMap) {
-
+    currentLocation = new GeoLocationPoint(0, 0);
     this.geoMap = geoMap;
     pathToEachCity = new HashMap<>();
     for (City each : geoMap.getCities()) {
+
       pathToEachCity.put(each.getCityName(), new ArrayList<>(Arrays.asList(each)));
     }
   }
@@ -51,7 +52,8 @@ public class GPS {
 
           citiesAndDistances.put(neighbourCity, distanceToCurrentCity + neighbourDistance);
 
-          List<City> pathToCurrentCity = new ArrayList<>(pathToEachCity.get(currentCity.getCityName()));
+          List<City> pathToCurrentCity = new ArrayList<>(
+              pathToEachCity.get(currentCity.getCityName()));
 
           pathToCurrentCity.add(neighbourCity);
           pathToEachCity.put(neighbourCity.getCityName(), pathToCurrentCity);
@@ -61,8 +63,8 @@ public class GPS {
 
     }
     System.out.println(citiesAndDistances);
-    GeoLocationPoint D = new GeoLocationPoint(2, 7);
-    System.out.println(pathToEachCity.get("D"));
+//    GeoLocationPoint G = new GeoLocationPoint(17, 18);
+    System.out.println(pathToEachCity);
     return null;
   }
 

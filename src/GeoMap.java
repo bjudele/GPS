@@ -1,13 +1,21 @@
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class GeoMap {
 
   private Set<City> cities = new HashSet<>();
-  private Set<Road> roads = new HashSet<>();
+  private Set<Road> roads = new TreeSet<>(new Comparator<Road>() {
+    @Override
+    public int compare(Road o1, Road o2) {
+      return Double.compare(o1.getLength(), o2.getLength());
+    }
+  });
 
   public City getCity(String cityName) {
     for (City each : cities) {
@@ -33,7 +41,7 @@ public class GeoMap {
   }
 
   public Map<City, Double> getNeighboursAndDistancesOf(City city) {
-    Map<City, Double> result = new HashMap<>();
+    Map<City, Double> result = new LinkedHashMap<>();
     for (Road each : roads) {
       if (each.connects(city)) {
         GeoLocationPoint a = each.getA();

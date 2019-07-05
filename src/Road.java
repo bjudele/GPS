@@ -3,10 +3,12 @@ import static java.lang.Math.sqrt;
 
 public class Road {
 
+  private String name;
   private GeoLocationPoint a;
   private GeoLocationPoint b;
 
-  public Road(GeoLocationPoint a, GeoLocationPoint b) {
+  public Road(String name, GeoLocationPoint a, GeoLocationPoint b) {
+    this.name = name;
     this.a = a;
     this.b = b;
   }
@@ -30,5 +32,10 @@ public class Road {
 
   public GeoLocationPoint getB() {
     return b;
+  }
+
+  @Override
+  public String toString() {
+    return name + ": " + this.getLength();
   }
 }
