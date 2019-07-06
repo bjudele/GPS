@@ -40,7 +40,7 @@ public class GeoMap {
     return result;
   }
 
-  public Map<City, Double> getNeighboursAndDistancesOf(City city) {
+  public Map<City, Double> getNeighboursWithDistancesOf(City city) {
     Map<City, Double> result = new LinkedHashMap<>();
     for (Road each : roads) {
       if (each.connects(city)) {
@@ -61,7 +61,7 @@ public class GeoMap {
   }
 
 
-  private City getCityAt(GeoLocationPoint locationPoint) {
+  public City getCityAt(GeoLocationPoint locationPoint) {
     for (City each : cities) {
       if (each.getGeoLocationPoint().equals(locationPoint)) {
         return each;

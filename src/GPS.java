@@ -19,12 +19,14 @@ public class GPS {
     pathToEachCity = new HashMap<>();
     for (City each : geoMap.getCities()) {
 
-      pathToEachCity.put(each.getCityName(), new ArrayList<>(Arrays.asList(each)));
+      pathToEachCity.put(each.getCityName(), new ArrayList<>(
+          Arrays.asList(geoMap.getCityAt(currentLocation))
+      ));
     }
   }
 
-  public List<Road> getDirection(String from, String to) {
-    City source = geoMap.getCity(from);
+  public List<Road> getDirection(String to) {
+    City source = geoMap.getCityAt(currentLocation);
     City target = geoMap.getCity(to);
 
     List<City> visitedCities = new LinkedList<>();
@@ -38,7 +40,7 @@ public class GPS {
       City currentCity = unvisitedCities.poll();
       Double distanceToCurrentCity = citiesAndDistances.get(currentCity);
 
-      Map<City, Double> currentCityNeighbours = geoMap.getNeighboursAndDistancesOf(currentCity);
+      Map<City, Double> currentCityNeighbours = geoMap.getNeighboursWithDistancesOf(currentCity);
 
       for (Map.Entry<City, Double> entry : currentCityNeighbours.entrySet()) {
         City neighbourCity = entry.getKey();
