@@ -61,7 +61,7 @@ public class GeoMap {
   }
 
 
-  private City getCityAt(GeoLocationPoint locationPoint) {
+  public City getCityAt(GeoLocationPoint locationPoint) {
     for (City each : cities) {
       if (each.getGeoLocationPoint().equals(locationPoint)) {
         return each;

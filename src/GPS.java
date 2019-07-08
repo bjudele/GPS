@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class GPS {
@@ -23,15 +22,12 @@ public class GPS {
     }
   }
 
-  public List<Road> getDirection(String from, String to) {
-    City source = geoMap.getCity(from);
-    City target = geoMap.getCity(to);
+  public List<City> getDirection(String to) {
+    City source = geoMap.getCityAt(currentLocation);
 
     List<City> visitedCities = new LinkedList<>();
-
     Map<City, Double> citiesAndDistances = geoMap.initialNeighboursAndDistances(source);
-
-    Queue<City> unvisitedCities = new PriorityQueue<City>();
+    Queue<City> unvisitedCities = new LinkedList<>();
     unvisitedCities.add(source);
 
     while (unvisitedCities.isEmpty() == false) {
@@ -63,29 +59,7 @@ public class GPS {
 
     }
     System.out.println(citiesAndDistances);
-//    GeoLocationPoint G = new GeoLocationPoint(17, 18);
     System.out.println(pathToEachCity);
-    return null;
-  }
-
-
-  public List<Road> getRoadsConnectedWith(String cityName) {
-    return null;
-  }
-
-  public GeoLocationPoint getCurrentLocation() {
-    return currentLocation;
-  }
-
-  public void setCurrentLocation(GeoLocationPoint currentLocation) {
-    this.currentLocation = currentLocation;
-  }
-
-  public GeoMap getMap() {
-    return geoMap;
-  }
-
-  public void setMap(GeoMap map) {
-    this.geoMap = map;
+    return pathToEachCity.get(to);
   }
 }
